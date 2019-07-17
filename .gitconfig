@@ -1,0 +1,25 @@
+[user]
+	name = Dylan Barnard
+	email = dylan.barnard@gmail.com
+[alias]
+	a = add
+	aa = add --all --intent-to-add
+	ap = add --patch
+
+	b = branch
+	bd = branch --delete
+	bdf = branch -D
+
+	c = commit
+	co = checkout
+	cob = checkout --branch
+	cm = commit -m
+
+	p = push
+	pf = push --force
+
+	la = "!git config -l | grep alias | cut -c 7-"
+	gui = !sh -c /usr/local/git/libexec/git-core/git-gui
+[rebase]
+	autosquash = true
+
