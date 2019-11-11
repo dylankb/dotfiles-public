@@ -7,7 +7,7 @@ alias viewprofile='vim ~/.bash_profile'
 alias dockerkill='docker container rm -f $(docker container ls -aq)'
 alias dotfiles='/usr/local/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
-source <(kubectl completion bash
+source <(kubectl completion bash)
 alias k=kubectl
 complete -F __start_kubectl k
 alias g=git
@@ -24,5 +24,3 @@ parse_git_branch() {
 export PS1="\u@\h \W\[\033[32m\]\$(parse_git_branch)\[\033[00m\] $ "
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
-
-

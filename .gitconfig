@@ -1,6 +1,9 @@
 [user]
 	name = Dylan Barnard
-	email = dylan.barnard@gmail.com
+[diff]
+    tool = vscode
+[difftool "vscode"]
+    cmd = code --wait --diff $LOCAL $REMOTE
 [alias]
 	a = add
 	aa = add --all --intent-to-add
@@ -46,7 +49,10 @@
 	s = status
 
 	la = "!git config -l | grep alias | cut -c 7-"
-	gui = !sh -c /usr/local/git/libexec/git-core/git-gui
+	# git alias to autosquash fixup commits non-interactivly
+	# `!GIT_SEQUENCE_EDITOR= ... --autosquash $COMMIT_SHA` where $COMMIT_SHA is a SHA prior to commit to fixup
+	# http://www.lowlevelmanager.com/2016/02/how-to-run-git-interactive-rebase-non.html
+	fixup = !GIT_SEQUENCE_EDITOR=true git rebase -i --autosquash
 [rebase]
 	autosquash = true
 
