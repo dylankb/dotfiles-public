@@ -1,0 +1,33 @@
+# bleopt rps1='\D{%c}' # if you want a right prompt
+# https://github.com/akinomyoga/ble.sh/issues/33
+bleopt complete_auto_wordbreaks=$' \t\n/' # M-right considers spaces + / as delimiters
+
+# Use C-c to cancel a menu completion or similar.
+# https://github.com/akinomyoga/ble.sh/issues/34
+function my/complete-load-hook {
+  ble-bind -m menu_complete -f C-c menu_complete/cancel
+}
+blehook/eval-after-load complete my/complete-load-hook
+
+# https://github.com/akinomyoga/ble.sh/issues/41
+ble-bind -s 'C-g C-b' '$(gb)\M-\C-e\M-\C-l'
+
+# https://github.com/akinomyoga/ble.sh/issues/45
+#bleopt decode_abort_char=3
+
+bleopt editor=vim
+# I think this limits the length of a line, not the number of lines
+#bleopt line_limit_type=editor line_limit_length=1000
+
+ble-color-setface filename_directory        underline
+ble-color-setface auto_complete             fg=8
+
+# Setup fzf
+if [[ ! "$PATH" == *"/usr/local/opt/fzf/bin"* ]]; then
+  export PATH="${PATH:+${PATH}:}/usr/local/opt/fzf/bin"
+fi
+ble-import -d contrib/fzf-completion
+ble-import -d contrib/fzf-key-bindings
+
+_ble_contrib_fzf_git_config=key-binding:sabbrev:arpeggio
+ble-import -d contrib/fzf-git
