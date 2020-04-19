@@ -9,9 +9,10 @@
 	aa = add --all --intent-to-add
 	ap = add --patch
 
-	b = branch
+	b = branch --sort=-committerdate
 	bd = branch --delete
 	bdf = branch -D
+	bdr = push origin --delete
 
 	c = commit
 	ca = commit --amend
@@ -20,9 +21,12 @@
 	cob = checkout -b
 	cm = commit -m
 
-	d = diff
-	dc = diff --cached
+	d = diff --ws-error-highlight=new,old
+	# There's a slight outdent with new lines
+        df = diff --color | sed -E "s/^([^-+ ]*)[-+ ]/\\1/" | less - r
 	db = diff master HEAD
+	dc = diff --cached
+	ds = diff --name-only
 	# Parametize this?
 	d1 = diff HEAD~1 HEAD
 	d2 = diff HEAD~3 HEAD
@@ -36,6 +40,7 @@
 	pf = push --force
 	po = "!git push --set-upstream origin \"$(git rev-parse --abbrev-ref HEAD)\""
 
+	# Copy sha previous to the provided sha - useful for getting a the right sha to provide git fixup SHA. master and HEAD~X also work.
 	prc = "!f() { git rev-parse \"$1^\" | pbcopy ; }; f"
 
 	pl = pull
@@ -47,6 +52,7 @@
 	rss = reset --soft
 
 	s = status
+	sb = "!git diff --name-only `git rev-parse --abbrev-ref HEAD` $(git merge-base `git rev-parse --abbrev-ref HEAD` master)" # files in current branch vs. master
 
 	la = "!git config -l | grep alias | cut -c 7-"
 	# git alias to autosquash fixup commits non-interactivly
@@ -58,3 +64,18 @@
 
 [push]
 	default = simple
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[core]
+	excludesfile = /Users/dbarnard/.gitignore_global
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path =
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[commit]
+	template = /Users/dbarnard/.stCommitMsg
