@@ -1,4 +1,4 @@
-[[ $- == *i* ]] && source /Users/dbarnard/Code/dev-tools/ble.sh/out/ble.sh --noattach
+[[ $- == *i* ]] && source $HOME/Code/dev-tools/ble.sh/out/ble.sh --noattach
 
 [[ $- == *i* ]] || return 0 # If this is not interactive session, then exit here
 
