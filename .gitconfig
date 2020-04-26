@@ -38,10 +38,13 @@
 
 	p = push
 	pf = push --force
+	# Push new (untracked) branch to remote in a single command
 	po = "!git push --set-upstream origin \"$(git rev-parse --abbrev-ref HEAD)\""
 
+	# Copy sha for head
+	sha = "!f() { git rev-parse HEAD | pbcopy ; }; f"
 	# Copy sha previous to the provided sha - useful for getting a the right sha to provide git fixup SHA. master and HEAD~X also work.
-	prc = "!f() { git rev-parse \"$1^\" | pbcopy ; }; f"
+	sha1 = "!f() { git rev-parse \"$1^\" | pbcopy ; }; f"
 
 	pl = pull
 
@@ -52,8 +55,10 @@
 	rss = reset --soft
 
 	s = status
-	sb = "!git diff --name-only `git rev-parse --abbrev-ref HEAD` $(git merge-base `git rev-parse --abbrev-ref HEAD` master)" # files in current branch vs. master
+	# files in current branch vs. master
+	sb = "!git diff --name-only `git rev-parse --abbrev-ref HEAD` $(git merge-base `git rev-parse --abbrev-ref HEAD` master)"
 
+	# View git aliases (this file)
 	la = "!git config -l | grep alias | cut -c 7-"
 	# git alias to autosquash fixup commits non-interactivly
 	# `!GIT_SEQUENCE_EDITOR= ... --autosquash $COMMIT_SHA` where $COMMIT_SHA is a SHA prior to commit to fixup
