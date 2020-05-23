@@ -7,14 +7,6 @@ alias viewprofile='vim ~/.bash_profile'
 alias dockerkill='docker container rm -f $(docker container ls -aq)'
 alias dotfiles='/usr/local/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
-source <(kubectl completion bash)
-alias k=kubectl
-complete -F __start_kubectl k
-alias g=git
-[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
-# Bash completion with git g alias
-__git_complete g __git_main
-
 ###
 # ble config
 ###

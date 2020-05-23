@@ -23,7 +23,7 @@ complete -F __start_kubectl k
 
 alias g=git
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
-# Bash completion with git g alias
+# Bash completion with git g alias - https://stackoverflow.com/a/15009611
 __git_complete g __git_main
 
 alias 'gg'="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
