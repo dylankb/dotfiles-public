@@ -21,8 +21,11 @@
 	cob = checkout -b
 	cm = commit -m
 
+	# --color-words is nice for copy/paste, but does strange things like show
+	# ws-error-highlight should work to highlight diff issues but doesn't seem to
+	# https://stackoverflow.com/questions/5257553/coloring-white-space-in-git-diffs-output
 	d = diff --ws-error-highlight=new,old
-	# There's a slight outdent with new lines
+	#There's a slight outdent with new lines
         df = diff --color | sed -E "s/^([^-+ ]*)[-+ ]/\\1/" | less - r
 	db = diff master HEAD
 	dc = diff --cached
@@ -35,15 +38,17 @@
 	f = fetch
 
 	l = log
+	# log line pretty - https://ma.ttias.be/pretty-git-log-in-one-line/
+	llp = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 
 	p = push
 	pf = push --force
-	# Push new (untracked) branch to remote in a single command
+	# push origin - Push new (untracked) branch to remote in a single command
 	po = "!git push --set-upstream origin \"$(git rev-parse --abbrev-ref HEAD)\""
 
 	# Copy sha for head
 	sha = "!f() { git rev-parse HEAD | pbcopy ; }; f"
-	# Copy sha previous to the provided sha - useful for getting a the right sha to provide git fixup SHA. master and HEAD~X also work.
+	# Copy sha previous to the provided sha - useful for getting the right sha for git fixup SHA. master and HEAD~X also work.
 	sha1 = "!f() { git rev-parse \"$1^\" | pbcopy ; }; f"
 
 	pl = pull
