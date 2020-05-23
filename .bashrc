@@ -12,6 +12,7 @@ alias dotfiles='/usr/local/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias rm='rm -i'
 # alias chmod='chmod --preserve-root' # invalid in macos
 
+# https://itnext.io/programmable-completion-for-bash-on-macos-f81a0103080b
 # https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-bash-completion
 export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
 [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
@@ -22,7 +23,6 @@ alias k=kubectl
 complete -F __start_kubectl k
 
 alias g=git
-[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 # Bash completion with git g alias - https://stackoverflow.com/a/15009611
 __git_complete g __git_main
 
