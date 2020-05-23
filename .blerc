@@ -23,6 +23,7 @@ ble-color-setface filename_directory        underline
 ble-color-setface auto_complete             fg=8
 
 # Setup fzf
+# https://github.com/akinomyoga/blesh-contrib#pencil-fzf-integration
 if [[ ! "$PATH" == *"/usr/local/opt/fzf/bin"* ]]; then
   export PATH="${PATH:+${PATH}:}/usr/local/opt/fzf/bin"
 fi
