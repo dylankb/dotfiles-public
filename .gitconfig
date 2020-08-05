@@ -49,7 +49,10 @@
 	# Copy sha for head
 	sha = "!f() { git rev-parse HEAD | pbcopy ; }; f"
 	# Copy sha previous to the provided sha - useful for getting the right sha for git fixup SHA. master and HEAD~X also work.
-	sha1 = "!f() { git rev-parse \"$1^\" | pbcopy ; }; f"
+	sha1 = "!f() { git rev-parse \"HEAD~1\" | pbcopy ; }; f"
+	# Short sha
+	ssha = "!f() { git rev-parse HEAD | cut -c 1-7 | pbcopy ; }; f"
+	ssha1 = "!f() { git rev-parse \"HEAD~1\" | cut -c 1-7 | pbcopy ; }; f"
 
 	pl = pull
 

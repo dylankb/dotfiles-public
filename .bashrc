@@ -28,5 +28,8 @@ __git_complete g __git_main
 
 alias 'gg'="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
 
+source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
+kubeoff
+
 # Add this line at the end of .bashrc:
 ((_ble_bash)) && ble-attach

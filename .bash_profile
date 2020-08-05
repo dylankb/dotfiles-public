@@ -1,6 +1,7 @@
 export GOPATH="$HOME/Code/go"
 export GOBIN="$GOPATH/bin"
 export PATH="$PATH:$GOPATH/bin"
+export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin"
 
 alias editprofile='vim ~/.bash_profile && source ~/.bash_profile'
 alias viewprofile='vim ~/.bash_profile'
@@ -42,7 +43,14 @@ parse_git_branch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
-export PS1="\u: \W\[\033[32m\]\$(parse_git_branch)\[\033[00m\] $ "
+# https://unix.stackexchange.com/a/124408/147651
+NORMAL="\[\033[00m\]"
+GREEN="\[\e[0;32m\]"
+RED="\[\e[1;31m\]"
+
+# https://github.com/jonmosco/kube-ps1
+export PS1="${RED}→ ${NORMAL}\W${GREEN}\$(parse_git_branch)${NORMAL}"
+PS1=$PS1'$(kube_ps1) $ '
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
